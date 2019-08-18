@@ -14,6 +14,9 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { TableListModule } from '../../table-list/table-list.module';
+
+
 
 @NgModule({
   imports: [
@@ -22,7 +25,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     FormsModule,
     ChartsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    TableListModule
   ],
   declarations: [
     DashboardComponent,
@@ -32,7 +36,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     TypographyComponent,
     IconsComponent,
     MapsComponent,
-    NotificationsComponent,
+    NotificationsComponent
   ]
 })
 

@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <div class='row'>
+      <div class='col-lg-6'>
+        <h4 class="card-title"> Quản lý quốc gia</h4>
+      </div>
+     <div class = "col-lg-6">
+        <app-nation-modal class="float-right" [nations] = "nations"></app-nation-modal>
+     </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+          <th>
+            ID
+          </th>
+          <th>
+            Tên quốc gia
+          </th>
+          <th>
+            Mô tả
+          </th>
+        </thead>
+        <tbody *ngFor="let ele of nations">
+          <tr>
+            <td>
+              {{ele.nation_id}}
+            </td>
+            <td>
+              {{ele.nation_name}}
+            </td>
+            <td>
+              {{ele.nation_describe}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+     
