@@ -4,41 +4,74 @@
       <div class='col-lg-6'>
         <h4 class="card-title"> Quản lý quốc gia</h4>
       </div>
-     <div class = "col-lg-6">
-        <app-nation-modal class="float-right" [nations] = "nations"></app-nation-modal>
-     </div>
+      <div class="col-lg-6">
+        <app-nation-modal class="float-right" [nations]="nations"></app-nation-modal>
+      </div>
     </div>
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table">
-        <thead class=" text-primary">
-          <th>
-            ID
-          </th>
-          <th>
-            Tên quốc gia
-          </th>
-          <th>
-            Mô tả
-          </th>
-        </thead>
-        <tbody *ngFor="let ele of nations">
-          <tr>
-            <td>
-              {{ele.nation_id}}
-            </td>
-            <td>
-              {{ele.nation_name}}
-            </td>
-            <td>
-              {{ele.nation_describe}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <form #editForm="ngForm">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              ID
+            </th>
+            <th>
+              Tên quốc gia
+            </th>
+            <th>
+              Mô tả
+            </th>
+            <th>
+              Hành động
+            </th>
+          </thead>
+          <tbody *ngFor="let ele of nations">
+            <tr>
+              <td>
+                {{ele.nation_id}}
+                <input type="hidden" name="nation_id" [(ngModel)]="editId" [value]="editId">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)"> {{ele.nation_name}}</div>
+                <input type="text" name="nation_name"
+                  *ngIf="isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)" [(ngModel)]="editNaName">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)">
+                  {{ele.nation_describe}}
+                </div>
+                <textarea type="text" name="nation_describe"
+                  *ngIf="isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)" [(ngModel)]="editNaDes">
+                {{editNaDes}}
+                </textarea>
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)">
+                  <button type="button" class="btn btn-secondary" (click)="editClick(ele.nation_id)"
+                    title="Sửa quốc gia">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger ml-1" title="Xóa quốc gia" (click)="delete(ele.nation_id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div *ngIf="isEditForm(ele.nation_id,ele.nation_name,ele.nation_describe)">
+                  <button type="button" class="btn btn-info" (click)="editSubmit(editForm)" title="Gửi">
+                    <i class="fa fa-paper-plane"></i>
+                  </button>
+                  <button type="button" class="btn btn-info ml-1" title="Hủy" (click)="editCancel()">
+                    <i class="fa fa-ban"></i>
+                  </button>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
   </div>
 </div>
-
-     
