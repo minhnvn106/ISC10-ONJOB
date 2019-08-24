@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-header">
+    <div class='row'>
+      <div class='col-lg-6'>
+        <h4 class="card-title"> Quản lý bằng cấp</h4>
+      </div>
+      <div class="col-lg-6">
+        <app-degree-modal class="float-right" [degrees]="degrees"></app-degree-modal>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <form #editForm="ngForm">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              ID
+            </th>
+            <th>
+              Bằng cấp
+            </th>
+            <th>
+              Mô tả
+            </th>
+            <th>
+              Hành động
+            </th>
+          </thead>
+          <tbody *ngFor="let ele of degrees">
+            <tr>
+              <td>
+                {{ele.Deg_id}}
+                <input type="hidden" name="Deg_id" [(ngModel)]="editId" [value]="editId">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)"> {{ele.Deg_name}}</div>
+                <input type="text" name="Deg_name"
+                  *ngIf="isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)" [(ngModel)]="editNaName">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)">
+                  {{ele.Deg_describe}}
+                </div>
+                <textarea type="text" name="Deg_describe"
+                  *ngIf="isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)" [(ngModel)]="editNaDes">
+                {{editNaDes}}
+                </textarea>
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)">
+                  <button type="button" class="btn btn-secondary" (click)="editClick(ele.Deg_id)"
+                    title="Sửa bằng">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger ml-1" title="Xóa bằng" (click)="delete(ele.Deg_id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div *ngIf="isEditForm(ele.Deg_id,ele.Deg_name,ele.Deg_describe)">
+                  <button type="button" class="btn btn-info" (click)="editSubmit(editForm)" title="Gửi">
+                    <i class="fa fa-paper-plane"></i>
+                  </button>
+                  <button type="button" class="btn btn-info ml-1" title="Hủy" (click)="editCancel()">
+                    <i class="fa fa-ban"></i>
+                  </button>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-header">
+    <div class='row'>
+      <div class='col-lg-6'>
+        <h4 class="card-title"> Quản lý ca làm việc</h4>
+      </div>
+      <div class="col-lg-6">
+        <app-shift-modal class="float-right" [shifts]="shifts"></app-shift-modal>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <form #editForm="ngForm">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              ID
+            </th>
+            <th>
+              Ca làm việc
+            </th>
+            <th>
+              Thời lượng
+            </th>
+            <th>
+              Hành động
+            </th>
+          </thead>
+          <tbody *ngFor="let ele of shifts">
+            <tr>
+              <td>
+                {{ele.id}}
+                <input type="hidden" name="id" [(ngModel)]="editId" [value]="editId">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)"> {{ele.Shift_Type}}</div>
+                <input type="text" name="Shift_Type"
+                  *ngIf="isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)" [(ngModel)]="editShType">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)">
+                  {{ele.Shift_Duration}}
+                </div>
+                <textarea type="text" name="Shift_Duration"
+                  *ngIf="isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)" [(ngModel)]="editShDur">
+                {{editShDur}}
+                </textarea>
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)">
+                  <button type="button" class="btn btn-secondary" (click)="editClick(ele.id)"
+                    title="Sửa ca làm">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger ml-1" title="Xóa ca làm" (click)="delete(ele.id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div *ngIf="isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)">
+                  <button type="button" class="btn btn-info" (click)="editSubmit(editForm)" title="Gửi">
+                    <i class="fa fa-paper-plane"></i>
+                  </button>
+                  <button type="button" class="btn btn-info ml-1" title="Hủy" (click)="editCancel()">
+                    <i class="fa fa-ban"></i>
+                  </button>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>

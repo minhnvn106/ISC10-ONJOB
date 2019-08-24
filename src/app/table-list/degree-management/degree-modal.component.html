@@ -1,0 +1,26 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Thêm bằng</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #formSignIn="ngForm">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="pwd">Bằng cấp:</label>
+        <input type="text" class="form-control" [(ngModel)]="degreeName" name="Deg_name">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Mô tả:</label>
+        <input type="text" class="form-control" [(ngModel)]="degreeDescribe" name="Deg_describe">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')"
+        (click)="addDegree(formSignIn)">Gửi</button>
+    </div>
+  </form>
+</ng-template>
+
+<button class="btn btn-success" (click)="open(content)">Thêm</button>

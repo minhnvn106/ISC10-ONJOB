@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-header">
+    <div class='row'>
+      <div class='col-lg-6'>
+        <h4 class="card-title"> Quản lý chứng chỉ</h4>
+      </div>
+      <div class="col-lg-6">
+        <app-certype-modal class="float-right" [certypes]="certypes"></app-certype-modal>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <form #editForm="ngForm">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              ID
+            </th>
+            <th>
+              Chứng chỉ
+            </th>
+            <th>
+              Lĩnh vực
+            </th>
+            <th>
+              Hành động
+            </th>
+          </thead>
+          <tbody *ngFor="let ele of certypes">
+            <tr>
+              <td>
+                {{ele.id}}
+                <input type="hidden" name="id" [(ngModel)]="editId" [value]="editId">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.CerType_name,ele.CerType_field)"> {{ele.CerType_name}}</div>
+                <input type="text" name="CerType_name"
+                  *ngIf="isEditForm(ele.id,ele.CerType_name,ele.CerType_field)" [(ngModel)]="editCeName">
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.CerType_name,ele.CerType_field)">
+                  {{ele.CerType_field}}
+                </div>
+                <textarea type="text" name="CerType_field"
+                  *ngIf="isEditForm(ele.id,ele.CerType_name,ele.CerType_field)" [(ngModel)]="editCeFld">
+                {{editCeFld}}
+                </textarea>
+              </td>
+              <td>
+                <div *ngIf="!isEditForm(ele.id,ele.CerType_name,ele.CerType_field)">
+                  <button type="button" class="btn btn-secondary" (click)="editClick(ele.id)"
+                    title="Sửa chứng chỉ">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger ml-1" title="Xóa chứng chỉ" (click)="delete(ele.id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+
+                <div *ngIf="isEditForm(ele.id,ele.CerType_name,ele.CerType_field)">
+                  <button type="button" class="btn btn-info" (click)="editSubmit(editForm)" title="Gửi">
+                    <i class="fa fa-paper-plane"></i>
+                  </button>
+                  <button type="button" class="btn btn-info ml-1" title="Hủy" (click)="editCancel()">
+                    <i class="fa fa-ban"></i>
+                  </button>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
