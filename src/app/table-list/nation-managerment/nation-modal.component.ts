@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Nation } from './nation';
 import { NationService } from './nation.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgxNotificationService } from 'ngx-notification';
+import { PNotifyService } from '../../utils/pnotify.service';
 
 
 @Component({
@@ -14,7 +16,14 @@ export class NationModalComponent {
   nationName: String;
   nationDescribe: String;
 
-  constructor(private modalService: NgbModal, private naService: NationService) { }
+  constructor(
+    private modalService: NgbModal,
+    private naService: NationService,
+    private ngxNotification: NgxNotificationService,
+    private pnotifyService: PNotifyService
+  ) {
+
+  }
 
   // them quoc gia
   addNation(formSignIn) {
@@ -29,7 +38,8 @@ export class NationModalComponent {
         // vo hieu hoa modal
         this.modalService.dismissAll();
         // thong bao
-        alert('Thêm thành công');
+        // this.pnotifyService.success();
+        this.ngxNotification.sendMessage('Thêm thành công', 'success', 'top-right');
       });
   }
 

@@ -12,6 +12,8 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { NgxNotificationComponent } from 'ngx-notification';
+import { PNotifyService } from './utils/pnotify.service';
 
 
 @NgModule({
@@ -27,9 +29,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    NgxNotificationComponent
   ],
-  providers: [],
+  providers: [PNotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

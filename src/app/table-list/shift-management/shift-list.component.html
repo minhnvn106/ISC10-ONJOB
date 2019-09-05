@@ -53,9 +53,10 @@
                     title="Sửa ca làm">
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-danger ml-1" title="Xóa ca làm" (click)="delete(ele.id)">
+                  <!-- <button type="button" class="btn btn-danger ml-1" title="Xóa ca làm" (click)="delete(ele.id)">
                     <i class="fa fa-times"></i>
-                  </button>
+                  </button> -->
+                  <confirm-app (event)="delete(ele.nation_id)"></confirm-app>
                 </div>
 
                 <div *ngIf="isEditForm(ele.id,ele.Shift_Type,ele.Shift_Duration)">

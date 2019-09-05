@@ -1,0 +1,14 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <P>Thực hiện hành động này ?</P>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('delete click')"
+      (click)="event.emit()">Có</button>
+    <div style="width: 100px"></div>
+    <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Không</button>
+  </div>
+</ng-template>
+
+
+<button class="btn btn-danger ml-1" (click)="openSm(content)"><i class="fa fa-times"></i></button>

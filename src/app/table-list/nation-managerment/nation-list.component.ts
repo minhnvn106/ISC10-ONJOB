@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NationService } from './nation.service';
 import { Nation } from './nation';
+import { NgxNotificationService } from 'ngx-notification';
 
 @Component({
   selector: 'nation-table-list',
@@ -14,9 +15,14 @@ export class NationListComponent implements OnInit {
   editNaName = '';
   editNaDes = '';
 
-  @ViewChild('editNaNameIn') editNaNameIn: ElementRef;
+  // @ViewChild('editNaNameIn') editNaNameIn: ElementRef;
 
-  constructor(private naService: NationService) { }
+  constructor(
+    private naService: NationService,
+    private ngxNotification: NgxNotificationService
+  ) {
+
+  }
 
   ngOnInit() {
     // lay danh sach quoc gia----------------------------------
@@ -44,6 +50,8 @@ export class NationListComponent implements OnInit {
   }
 
   editSubmit(editForm) {
+    console.log(editForm.value);
+    
     this.naService.updateNation(editForm.value).subscribe((aNation: Nation) => {
       // cap nhat danh sach quoc gia sau khi sua
       this.nations.forEach(element => {
@@ -54,6 +62,8 @@ export class NationListComponent implements OnInit {
       });
       // dat lai
       this.editId = -1;
+      // thong bao thanh cong
+      this.ngxNotification.sendMessage('Sửa thành công', 'success', 'top-right');
     });
   }
 
@@ -66,6 +76,8 @@ export class NationListComponent implements OnInit {
         this.nations.splice(index, 1);
       }
     });
+    // thong bao
+    this.ngxNotification.sendMessage('Xóa thành công', 'success', 'top-right');
   }
 
 }

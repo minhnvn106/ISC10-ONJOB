@@ -1,0 +1,16 @@
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <P>Bạn có muốn thực hiện hành động này ?</P>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-6"> <button type="button" class="col-6 btn btn-danger"
+          (click)="modal.close('delete click')" (click)="deleteEvent.emit()">Có</button></div>
+      <div class="col-lg-6"> <button type="button" class="col-6 btn btn-dark float-right"
+          (click)="modal.dismiss('Cross click')">Không</button></div>
+    </div>
+  </div>
+</ng-template>
+
+
+<button class="btn btn-danger ml-1" (click)="open(content)"><i class="fa fa-times"></i></button>
